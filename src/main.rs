@@ -14,6 +14,7 @@ const URL: &str = "https://api.devnet.solana.com";
 fn main() {
     let _rpc_client = RpcClient::new(URL);
 
+    // how do i save priv key and use on program restart
     let sender: Keypair = create_keypair();
     let receiver: Keypair = create_keypair();
 
