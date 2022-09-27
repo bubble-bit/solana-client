@@ -48,20 +48,15 @@ fn main() {
     //     println!("Airdrop failed");
     // }
 
-    println!("\n==============================\n");
-
     let epoch_info = rpc_client.get_epoch_info();
     println!("epock_info: {:?}\n", epoch_info);
 
-    // Get the time of the most recent finalized block
+    let slot = rpc_client.get_slot().expect("failed to get slot");
+    println!("get_slot: {} \n", slot); 
 
-    let slot = rpc_client.get_slot().expect("FAILED TO GET SLOT");
+    let block_time = rpc_client.get_block_time(slot).expect("failed to get block time");
+    println!("block_time: {:?}\n", block_time);
 
-    println!("get_slot: {}", slot); 
-    // let block_time = rpc_client.get_block_time(slot)?;
-    // println!("block_time: {:?}\n", block_time);
-
-
-    let production = rpc_client.get_block_production();
-    println!("get_block_production: {:?}\n", production);
+    let block = rpc_client.get_block(slot).expect("failed to get block");
+    println!("get_block: {:?}", block);
 }
