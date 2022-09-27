@@ -19,7 +19,9 @@ const URL: &str = "https://api.devnet.solana.com";
 fn main() {
     let rpc_client = RpcClient::new(URL);
 
-    // let new_key: Keypair = RpcClient::
+    let new_key = create_keypair();
+    let secret =  new_key.to_base58_string();
+    println!("new key secret: {:?}", secret);
 
     let recovered: Keypair = from_key("key.txt");
     let pubkey = recovered.pubkey();
