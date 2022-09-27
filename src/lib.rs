@@ -11,8 +11,8 @@ pub fn create_keypair() -> Keypair {
     Keypair::new()
 }
 
-pub fn from_key() -> Keypair {
-    let key = fs::read_to_string("key.txt")
+pub fn from_key(file_name: &str) -> Keypair {
+    let key = fs::read_to_string(file_name)
         .expect("The file coud not be read");
 
     Keypair::from_base58_string(&key)
