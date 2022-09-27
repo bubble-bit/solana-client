@@ -10,6 +10,9 @@ use rust_client::{create_keypair, from_key, check_balance, request_air_drop};
 
 use solana_sdk::signature::Signer;
 
+// #[macro_use]
+// extern crate serde_json;
+
 const URL: &str = "https://api.devnet.solana.com";
 
 // Accounts api was lacking, I couldn't find trx info etc
@@ -26,7 +29,6 @@ fn main() {
     let recovered: Keypair = from_key("key.txt");
     let pubkey = recovered.pubkey();
 
-    println!("Recovered: {:?}", recovered);
     println!("Recovered: {:?}", recovered.to_base58_string());
     println!("\n==============================\n");
 
@@ -48,6 +50,7 @@ fn main() {
     //     println!("Airdrop failed");
     // }
 
+
     let epoch_info = rpc_client.get_epoch_info();
     println!("epock_info: {:?}\n", epoch_info);
 
@@ -57,6 +60,15 @@ fn main() {
     let block_time = rpc_client.get_block_time(slot).expect("failed to get block time");
     println!("block_time: {:?}\n", block_time);
 
+    // let obj = json!({"foo":1,"bar":2});
+    // println!("{}", serde_json::to_string_pretty(&obj).unwrap());
+
     let block = rpc_client.get_block(slot).expect("failed to get block");
-    println!("get_block: {:?}", block);
+    // println!("{}", serde_json::to_string_pretty(&block).unwrap());
+
+    println!("\n==============================\n");
+
+    for i in &block.transactions {
+        println!("trx : {:?}\n", i.transaction);
+    }
 }
