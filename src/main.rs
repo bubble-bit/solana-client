@@ -68,7 +68,7 @@ fn main() {
 
     println!("\n==============================\n");
 
-    for i in &block.transactions {
-        println!("trx : {:?}\n", i.transaction);
+    for trx in &block.transactions {
+        println!("trx : {:?}\n", trx.transaction);
     }
 }
